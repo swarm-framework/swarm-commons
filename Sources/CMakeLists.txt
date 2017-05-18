@@ -1,7 +1,11 @@
 
+# Include current and cxxlog Sources to include search directories
+include_directories(. ${cxx-logs-INCLUDE})
+
 # Add sources files
 set (${PROJECT_NAME}_SOURCES
-    main.cxx
+    swarm/exception/SwarmException.cxx swarm/exception/SwarmException.hxx
+    swarm/network/IPAddress.cxx swarm/network/IPAddress.hxx
 )
 
 # Create library
