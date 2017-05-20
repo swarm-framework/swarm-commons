@@ -6,6 +6,9 @@ project(swarm-commons)
 # enable tests
 enable_testing()
 
+# Include CMakeLists.txt
+include(Config/CMakeLists.txt)
+
 # Include dependencies
 add_subdirectory(Dependencies)
 
