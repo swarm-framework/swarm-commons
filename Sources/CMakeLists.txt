@@ -6,6 +6,7 @@ include_directories(. ${cxx-logs-INCLUDE})
 set (${PROJECT_NAME}_SOURCES
     swarm/exception/SwarmException.cxx swarm/exception/SwarmException.hxx
     swarm/network/IPAddress.cxx swarm/network/IPAddress.hxx
+    swarm/http/MediaType.cxx swarm/http/MediaType.hxx
 )
 
 # Create library

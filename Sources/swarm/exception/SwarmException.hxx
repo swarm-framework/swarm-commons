@@ -46,6 +46,7 @@ namespace swarm {
         template <typename... T>
         SwarmException(const std::string &msg, T... args) : message_(cxxlog::format(msg, args...)) {}
 
+        // Override waht method
         virtual const char *what() const noexcept override { return message_.c_str(); }
     };
 }
