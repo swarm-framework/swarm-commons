@@ -1,6 +1,6 @@
 
 # Include current and cxxlog Sources to include search directories
-include_directories(. ${cxx-logs-INCLUDE})
+include_directories(.)
 
 # Add sources files
 set (${PROJECT_NAME}_SOURCES
@@ -10,7 +10,10 @@ set (${PROJECT_NAME}_SOURCES
 )
 
 # Create library
-add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCES})
+add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCES})   
+target_link_libraries(${PROJECT_NAME}
+    cxxlog
+)
 
 # Install exec in bin directory
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
