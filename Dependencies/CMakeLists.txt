@@ -1,4 +1,4 @@
-if(NOT DEFINED cxx-log)
+if(EXISTS ${PROJECT_SOURCE_DIR}/Dependencies/cxx-log)
 
     # Include cxx-log
     add_subdirectory(${PROJECT_SOURCE_DIR}/Dependencies/cxx-log)
