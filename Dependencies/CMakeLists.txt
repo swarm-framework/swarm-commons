@@ -1,7 +1,3 @@
-
-# Enable ExternalProject CMake module
-include(ExternalProject)
-
 if(NOT DEFINED swarm-commons)
 
     # Include cxx-log
