@@ -1,4 +1,4 @@
-if(NOT DEFINED swarm-commons)
+if(NOT DEFINED cxx-log)
 
     # Include cxx-log
     add_subdirectory(${PROJECT_SOURCE_DIR}/Dependencies/cxx-log)
