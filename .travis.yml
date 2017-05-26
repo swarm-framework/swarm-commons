@@ -5,6 +5,13 @@ compiler:
 - clang
 os:
 - linux
+addons:
+  apt:
+    sources:
+      - boost-latest
+    packages:
+      - libboost-all-dev
+      - cmake
 script: 
 - mkdir build
 - cd build
