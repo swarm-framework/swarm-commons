@@ -59,6 +59,12 @@ namespace swarm {
             return false;
         }
 
+        // Override ostream operator        
+        std::ostream & operator<<(std::ostream & os, const MediaType & mediaType) {
+            os << mediaType.str();
+            return os;
+        }
+
         const MediaType MediaType::APPLICATION_JSON = MediaType{"application", "json"};
         const MediaType MediaType::APPLICATION_XML = MediaType{"application", "xml"};
         const MediaType MediaType::TEXT_HTML = MediaType{"text", "html"};

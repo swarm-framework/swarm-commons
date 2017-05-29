@@ -106,6 +106,9 @@ namespace swarm {
             /// \brief Media-type for Gif
             static const MediaType IMAGE_GIF;
         };
+
+        // Override ostream operator        
+        std::ostream & operator<<(std::ostream & os, const MediaType & mediaType);
     }
 }
 
