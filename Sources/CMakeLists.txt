@@ -12,7 +12,7 @@ set (${PROJECT_NAME}_SOURCES
 # Create library
 add_library(${PROJECT_NAME} ${${PROJECT_NAME}_SOURCES})   
 target_link_libraries(${PROJECT_NAME}
-    cxxlog
+    cxx-log
 )
 
 # Install exec in bin directory
