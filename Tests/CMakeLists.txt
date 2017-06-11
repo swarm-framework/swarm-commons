@@ -10,19 +10,18 @@ if (NOT "${CATCH_FILE_PATH}")
     file(DOWNLOAD "https://github.com/philsquared/Catch/releases/download/${CATCH_VERSION}/catch.hpp" "${CATCH_FILE_PATH}")
 endif()
 
-# Includes
-include_directories(
-    ../Sources  # Project sources
-    ${PROJECT_SOURCE_DIR}/Dependencies/volatile/${CATCH_VERSION} # catch directory
-)
-
-# Add sources files
-set (${PROJECT_NAME}_TEST_SOURCES
+# Create create executable
+add_executable(${PROJECT_NAME}Tests 
+    ${${PROJECT_NAME}_TEST_SOURCES}
     main.cxx
 )
-
-# Create create executable
-add_executable(${PROJECT_NAME}Tests ${${PROJECT_NAME}_TEST_SOURCES})
+target_include_directories(
+    ${PROJECT_NAME}Tests 
+    
+    PUBLIC
+        ../Sources  # Project sources
+        ${PROJECT_SOURCE_DIR}/Dependencies/volatile/${CATCH_VERSION} # catch directory
+)
 target_link_libraries(${PROJECT_NAME}Tests
     ${PROJECT_NAME}
 )

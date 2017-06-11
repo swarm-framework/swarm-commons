@@ -1,19 +1,16 @@
-cmake_minimum_required(VERSION 3.0.0)
+# Set minimum version of CMake.
+cmake_minimum_required(VERSION 3.0)
 
-# Define project name
-project(swarm-commons)
+# Set variables:
+#   * PROJECT_NAME
+#   * PROJECT_VERSION
+project(swarm-commons VERSION 0.1.0)
 
-# enable tests
-enable_testing()
-
-# Include CMakeLists.txt
-include(Config/CMakeLists.txt)
-
-# Include dependencies
-include(Dependencies/CMakeLists.txt)
+# include config
+include(Config/config.cmake)
 
 # Include sources
-add_subdirectory(Sources)
+include(Config/build.cmake)
 
 # Include test
 add_subdirectory(Tests)
