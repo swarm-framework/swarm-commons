@@ -18,7 +18,7 @@
 #ifndef SWARM_NETWORK_IPADDRESS_HXX
 #define SWARM_NETWORK_IPADDRESS_HXX
 
-#include "swarm/exception/SwarmException.hxx"
+#include "../exception/SwarmException.hxx"
 #include <string>
 
 namespace swarm {
