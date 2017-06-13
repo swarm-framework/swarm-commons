@@ -12,10 +12,10 @@ add_library(swarm-commons
 
 # Add definitions for targets
 # Values:
-#   * Debug: -DSWAM_COMMON_DEBUG=1
-#   * Release: -DSWAM_COMMON_DEBUG=0
-#   * other: -DSWAM_COMMON_DEBUG=0
-target_compile_definitions(swarm-commons  PUBLIC "SWAM_COMMON_DEBUG=$<CONFIG:Debug>")
+#   * Debug: -DSWARM_COMMON_DEBUG=1
+#   * Release: -DSWARM_COMMON_DEBUG=0
+#   * other: -DSWARM_COMMON_DEBUG=0
+target_compile_definitions(swarm-commons  PUBLIC "SWARM_COMMON_DEBUG=$<CONFIG:Debug>")
 
 # Generate headers:
 include(GenerateExportHeader)
