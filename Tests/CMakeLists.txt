@@ -12,11 +12,14 @@ endif()
 
 # Create create executable
 add_executable(${PROJECT_NAME}Tests 
-    ${${PROJECT_NAME}_TEST_SOURCES}
     main.cxx
+    exception/SwarmExceptionTest.cxx
 )
 target_include_directories(
     ${PROJECT_NAME}Tests 
+    
+    PRIVATE
+        ${cxx-log_INCLUDE_DIR}
     
     PUBLIC
         ../Sources  # Project sources

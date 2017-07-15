@@ -18,7 +18,7 @@
 #ifndef SWARMEXCEPTION_HXX
 #define SWARMEXCEPTION_HXX
 
-#include <cxxlog/Formatter.hxx>
+#include <cxx-log/Formatter.hxx>
 #include <exception>
 #include <string>
 

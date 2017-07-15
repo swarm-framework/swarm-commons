@@ -38,3 +38,7 @@ Dependencies/volatile/**/*
 
 # CLion
 .idea
+
+# LCov
+build-report
+

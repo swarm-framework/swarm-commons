@@ -1,39 +1,39 @@
-# Include cxx-log
-find_dependencies(cxx-log)
-
-# Create targets
-add_library(swarm-commons
-    Sources/swarm/exception/SwarmException.cxx Sources/swarm/exception/SwarmException.hxx
-    Sources/swarm/network/IPAddress.cxx Sources/swarm/network/IPAddress.hxx
-    Sources/swarm/http/MediaType.cxx Sources/swarm/http/MediaType.hxx
-)
-
-# Properties of targets
-
-# Add definitions for targets
-# Values:
-#   * Debug: -DSWARM_COMMON_DEBUG=1
-#   * Release: -DSWARM_COMMON_DEBUG=0
-#   * other: -DSWARM_COMMON_DEBUG=0
-target_compile_definitions(swarm-commons  PUBLIC "SWARM_COMMON_DEBUG=$<CONFIG:Debug>")
-
 # Generate headers:
 include(GenerateExportHeader)
-generate_export_header(swarm-commons)
+generate_export_header(${PROJECT_NAME})
+
+# Create test coverage target (gcov)
+if (CMAKE_BUILD_TYPE STREQUAL "Coverage")
+    message("-- Activate Coverage for ${PROJECT_NAME}")
+	set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE ON)
+	set(CMAKE_CXX_FLAGS "-g -O0 -Wall -fprofile-arcs -ftest-coverage")
+    set(CMAKE_C_FLAGS "-g -O0 -Wall -W -fprofile-arcs -ftest-coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
+
+endif()
 
 # Global includes. Used by all targets
+# Note:
+#   * header location in project: Foo/Source/foo/Bar.hpp
+#   * header can be included by C++ code `#include <foo/Bar.hpp>`
+#   * header location in project: ${CMAKE_CURRENT_BINARY_DIR}/bar_export.hpp
+#   * header can be included by: `#include <bar_export.hpp>`
 target_include_directories(
-    swarm-commons 
+    ${PROJECT_NAME} 
     
     PUBLIC
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/Sources>"
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
-        
-    PRIVATE
-        ${cxx-log_INCLUDE_DIR}
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST_DIR}/Sources>"
+    "$<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>"
+
 )
 
+####
 # Installation (https://github.com/forexample/package-example)
+
+# Layout. This works for all platforms:
+#   * <prefix>/lib/cmake/<PROJECT-NAME>
+#   * <prefix>/lib/
+#   * <prefix>/include/
 set(config_install_dir "lib/cmake/${PROJECT_NAME}")
 set(include_install_dir "include")
 
@@ -65,11 +65,9 @@ configure_package_config_file(
 )
 
 # Targets:
-#   * <prefix>/lib/${target}.a
-#   * header location after install: <prefix>/include/*.hxx
-#   * headers can be included by C++ code `#include <project/*.hxx>`
+#   * <prefix>/lib/${PROJECT_NAME}.a
 install(
-    TARGETS swarm-commons
+    TARGETS ${PROJECT_NAME}
     EXPORT "${targets_export_name}"
     LIBRARY DESTINATION "lib"
     ARCHIVE DESTINATION "lib"
@@ -78,30 +76,26 @@ install(
 )
 
 # Headers:
-#   * Sources/${target}/*.hxx -> <prefix>/include/${target}/*.hxx
 install(
-    DIRECTORY "Sources/swarm"
+    DIRECTORY "Sources/${PROJECT_NAME}"
     DESTINATION "${include_install_dir}"
     FILES_MATCHING PATTERN "*.hxx"
 )
 
 # Export headers:
-#   * ${CMAKE_CURRENT_BINARY_DIR}/${target}_export.h -> <prefix>/include/${target}_export.h
 install(
     FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/swarm-commons_export.h"
+        "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}_export.h"
     DESTINATION "${include_install_dir}"
 )
 
 # Config
-#   * <prefix>/lib/cmake/${project}/${Target}Config.cmake
 install(
     FILES "${project_config}" "${version_config}"
     DESTINATION "${config_install_dir}"
 )
 
 # Config
-#   * <prefix>/lib/cmake/${project}/${Target}Targets.cmake
 install(
     EXPORT "${targets_export_name}"
     NAMESPACE "${namespace}"
